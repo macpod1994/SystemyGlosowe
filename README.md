@@ -34,7 +34,7 @@
     * [Source](http://www.diva-portal.org/smash/get/diva2:525564/fulltext01.pdf)
     
  3. Feature extraction and machine learning - First stage of algorithm involves data preprocessing so that it removes unnecesary information from records and leaves samples which can be distinguished and classified in second stage, where some popular classificator from machine learning should be used i.e. SVM, K nearest neighbours or Neural Network.
- Feature recognition is 
+ Feature extraction is usually based on [MFCC](http://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/) which identifies components of audio signal that correspond to linguistic information and filters most of redundant features of audio signal.
   * Advantages: 
     * that's how it should be done professionally
     * removal of individual information during first stage, which in our case is noise
