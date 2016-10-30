@@ -47,6 +47,7 @@
     * [Feature extraction in Python](https://github.com/jameslyons/python_speech_features)
     * [Feature extraction in MATLAB](http://labrosa.ee.columbia.edu/matlab/rastamat/)
     * [Machine learning classifiers in Python](http://scikit-learn.org/stable/supervised_learning.html#supervised-learning)
+    * [Presentation of classification techniques](http://htmlpreview.github.io/?https://github.com/macpod1994/SystemyGlosowe/blob/master/Classification_presentation.html)
     
 ## Interpretation of MFCC
 
