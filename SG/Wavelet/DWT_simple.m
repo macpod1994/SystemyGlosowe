@@ -1,6 +1,6 @@
 %% Load signal
-load test_4;
-y=sig(:,1);
+load start_Karolina_1;
+y=y(:,1);
 t=(0:length(y)-1)'/fs;
 order=9;
 wname='dmey';
@@ -24,7 +24,8 @@ for i=2:order+1
     maxs(i)=ind/L(i);
     thr(i)=sum(abs(C(sums(i-1)+1:sums(i)))>0.1)/L(i);
 end
-six=DWT_val(6)/max(DWT_val);
+six=DWT_val(6)/DWT_val(5);
+nine=DWT_val(9)/max(DWT_val);
 figure;
 hold on;
 plot(DWT_val,'b');
@@ -32,3 +33,4 @@ plot(times,'r');
 plot(maxs,'g');
 plot(thr,'m');
 plot(six,'*');
+plot(nine,'*');
