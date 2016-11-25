@@ -36,7 +36,8 @@ function [Cx, Nramek] = cepstrum( x )
         a = [a zeros(1,Nc-Np)];                               % uzupe³nij zerami
         c(1) = a(1);
         for m = 2 : Nc
-            k = 1:m-1; c(m) = a(m) + sum(c(k).*a(m-k).*k/m);  % wspó³czynniki cepstralne
+            k = 1:m-1;
+            c(m) = a(m) + sum(c(k).*a(m-k).*k/m);  % wspó³czynniki cepstralne
         end
       % Obliczenie wspó³czynników cepstralnych metod¹ FFT
       % c1 = real( ifft( log( abs(fft(bx)).^2 ) ) );          % zrób to sam

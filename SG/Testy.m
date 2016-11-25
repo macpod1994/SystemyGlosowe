@@ -11,7 +11,7 @@
   Mstep = (tstep*0.001)*fpr;  %  liczba próbek przesuniêcia pomiêdzy kolejnymi po³o¿eniami okna
   
   slowa = {'lewo'; 'prawo'; 'start'; 'stop'};
-  imie='Marcin';
+  imie='Karolina';
   
   M = length( slowa );        %  liczba rozpoznawanych s³ów
   
