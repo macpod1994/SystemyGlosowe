@@ -76,7 +76,7 @@ class Alg(object):
             for nw in range(1, Nw):                             #
                 g[0, nw] = g[0, nw-1] + d[0, nw]                # zakumuluj pierwszy wiersz
             for ns in range(1, Ns, 1):                          # akumuluj w pionie
-                for nw in range(max(down[ns], 1), up[ns]):   # akumuluj w poziomie
+                for nw in range(max(down[ns]-1, 1), up[ns]):   # akumuluj w poziomie
                     dd = d[ns, nw]                              # odległość cepstrum "ns" słowa od wzorca "nw"
                     temp[0] = g[ns - 1, nw] + dd                # ruch do góry
                     temp[1] = g[ns - 1, nw-1] + 2*dd            # ruch po przekątnej (do góry w prawo)
