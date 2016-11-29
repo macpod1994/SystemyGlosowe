@@ -1,0 +1,31 @@
+body {
+    overflow-x: hidden;
+}
+
+.main-banner {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.6em;
+}
+
+.numval-parent div {
+    text-align: center;
+}
+
+.numval-parent {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#identification-result {
+    text-align: center;
+}
+
+#result-plot {
+    text-align: center;
+}
+
+#result-plot div {
+    margin: auto;
+    display: block;
+}

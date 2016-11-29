@@ -85,7 +85,7 @@ class Alg(object):
             glob[numer] = g[Ns-1, Nw-1] / math.sqrt(Ns**2 + Nw**2)  # % wartość zakumulowana "najkrótszej" ścieżki
 
         nr = np.argmin(glob)                                    #  numer wzorca o najmniejszej wartości zakumulowanej
-        return nr
+        return nr, glob
 
     def cepstrum(self, sygnal):
         N = len(sygnal)                                                 #
@@ -148,5 +148,5 @@ if __name__ == '__main__':
             y = y[:, 0]
             syg = a.cisza(y)
             Cx = a.cepstrum(syg)
-            nr = a.dtw(Cx[0],C,Nramek)
-            print('{} to {}'.format(a.slowa[i],a.slowa[nr]))
+            nr, glob = a.dtw(Cx[0],C,Nramek)
+            print('{} to {}, {}'.format(a.slowa[i],a.slowa[nr], glob[nr]))

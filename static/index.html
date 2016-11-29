@@ -1,0 +1,49 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Rozpoznawanie komend głosowych</title>
+
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/dropdown.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2 class="main-banner">Rozpoznawanie komend głosowych</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div id="record-button" class="col-xs-12">
+        <button onclick="recordAndMatch()" class="row dropbtn">Nagraj próbkę</button>
+    </div>
+</div>
+
+<div class="row">
+    <div id="identification-result" class="col-xs-12">
+        <p></p>
+    </div>
+</div>
+
+<div class="row">
+    <div id="result-plot" class="col-xs-12"></div>
+</div>
+
+<!--<div class="row">
+    <div id="main-chart" class="col-lg-6 col-xs-12"></div>
+    <div id="stream-chart" class="col-lg-6 col-xs-12"></div>
+    <div id="building-chart" class="col-lg-6 col-xs-12"></div>
+    <div id="outside-chart" class="col-lg-6 col-xs-12"></div>
+</div> -->
+
+</body>
+
+<script type="text/javascript" src="js/plotly-latest.min.js"></script>
+<script type="text/javascript" src="js/genChart.js"></script>
+<script type="text/javascript" src="js/recordAndMatch.js"></script>
+
+</html>
