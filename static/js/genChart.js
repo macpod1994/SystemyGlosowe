@@ -16,7 +16,7 @@ var genChart = function () {
             //size: [40, 60, 80, 100],
             size: [250/(1+distance[0]),250/(1+distance[1]),250/(1+distance[2]),250/(1+distance[3])],
         }
-};
+    };
 
     var data = [trace1];
 
