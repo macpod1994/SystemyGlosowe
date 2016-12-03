@@ -6,10 +6,15 @@
 var d3 = Plotly.d3;
 
 var genChart = function () {
+    var names = distance;
+    for(var i in distance){
+        if(distance[i]==10000)
+            names[i] = "Inf";
+    }
     var trace1 = {
         x: [-10,10,0,0],
         y: [0, 0, 10, -10],
-        text: ['lewo ' + distance[0], 'prawo ' + distance[1], 'start ' + distance[2], 'stop ' + distance[3]],
+        text: ['lewo ' + names[0], 'prawo ' + names[1], 'start ' + names[2], 'stop ' + names[3]],
         mode: 'markers+text',
         marker: {
             color: ['rgb(93, 164, 214)', 'rgb(255, 144, 14)',  'rgb(44, 160, 101)', 'rgb(255, 65, 54)'],

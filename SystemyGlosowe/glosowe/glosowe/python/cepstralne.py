@@ -2,6 +2,8 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import scipy.io as sio
+import sounddevice as sd
+import time
 
 class Alg(object):
     fpr = 44100                    # czestotliwość próbkowania
@@ -10,6 +12,8 @@ class Alg(object):
     twind = 30                     # długość okna obserwacji (ramki danych) w milisekundach
     tstep = 10                     # przesunięcie pomiędzy kolejnymi położeniami okna w milisekundach
     slowa = ['lewo', 'prawo', 'start', 'stop']
+    C = []
+    Nramek = []
 
     def __init__(self):
         self.Mlen = int((Alg.twind*0.001)*Alg.fpr)
@@ -49,6 +53,8 @@ class Alg(object):
     def dtw(self, Cx, Cwzr, Nwzr):
 
         Ns, Np = np.shape(Cx)
+        print(Ns)
+        print(Np)
 
         down = np.arange(Ns)  #alokacja
         up = np.arange(Ns)
@@ -68,7 +74,7 @@ class Alg(object):
 
 
             # Obliczenie odległości zakumulowanej g()
-            g = np.copy(d)                                               # inicjalizacja
+            g = np.copy(d)# inicjalizacja
             temp = np.arange(3.)                                 # alokacja
 
             for ns in range(1, Ns):
@@ -130,23 +136,59 @@ class Alg(object):
 if __name__ == '__main__':
 
     a=Alg()
-    C = []
-    Nramek = []
-    for i in range(4):  # Tworzenie bazy danych
-        y = sio.loadmat('../SG/{}_Karolina_1'.format(a.slowa[i]))
-        y = y['y']
-        y = y[:, 0]
-        syg = a.cisza(y)
-        Cx = a.cepstrum(syg)
-        C.append(Cx[0])
-        Nramek.append(Cx[1])
+    # C = []
+    # Nramek = []
 
-    for i in range(4): # Test
-        for k in range(4):
-            y = sio.loadmat('../SG/{}_Karolina_{}'.format((a.slowa[i]),(k+1)))
-            y = y['y']
-            y = y[:, 0]
-            syg = a.cisza(y)
-            Cx = a.cepstrum(syg)
-            nr, glob = a.dtw(Cx[0],C,Nramek)
-            print('{} to {}, {}'.format(a.slowa[i],a.slowa[nr], glob[nr]))
+    duration = 3  # seconds
+    sd.default.samplerate = a.fpr
+    sd.default.channels = 1
+    sd.rec(200, dtype='float64')
+
+    for i in range(4):  # Tworzenie bazy danych
+        # y = sio.loadmat('../SG/{}_Karolina_1'.format(a.slowa[i]))
+        # y = y['y']
+        # y = y[:, 0]
+        # print(type(y[0]))
+        # syg = a.cisza(y)
+
+        print("begin")
+        myrecording = sd.rec(duration * a.fpr, dtype='float64')
+        print("start")
+        sd.wait()
+        # print("play")
+        # sd.play(myrecording, a.fpr)
+        # time.sleep(4)
+
+        print(np.shape(myrecording[:, 0]))
+        syg = a.cisza(myrecording[:, 0])
+        Cx = a.cepstrum(syg)
+
+        a.C.append(Cx[0])
+        a.Nramek.append(Cx[1])
+
+    # print( sd.query_devices())
+
+    # for i in range(4): # Test
+    #     for k in range(4):
+    #         y = sio.loadmat('../SG/{}_Karolina_{}'.format((a.slowa[i]),(k+1)))
+    #         y = y['y']
+    #         y = y[:, 0]
+    #         print(np.shape(y))
+    #         syg = a.cisza(y)
+    #         Cx = a.cepstrum(syg)
+    #         nr, glob = a.dtw(Cx[0],C,Nramek)
+    #         print('{} to {}, {}'.format(a.slowa[i],a.slowa[nr], glob[nr]))
+
+    print("begin")
+    myrecording = sd.rec(duration * a.fpr, dtype='float64')
+    print("start")
+    sd.wait()
+    # print("play")
+    # sd.play(myrecording, a.fpr)
+    # time.sleep(4)
+
+    print(np.shape(myrecording[:,0]))
+    syg = a.cisza(myrecording[:,0])
+    Cx = a.cepstrum(syg)
+    nr, glob = a.dtw(Cx[0], a.C, a.Nramek)
+    print('{}, {}'.format(a.slowa[nr], glob[nr]))

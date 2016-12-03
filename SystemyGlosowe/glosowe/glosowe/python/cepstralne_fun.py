@@ -5,6 +5,7 @@ import math
 import matplotlib.pyplot as plt
 import scipy.io as sio
 import re
+import sounddevice as sd
 
 class Alg(object):
     fpr = 44100                    
@@ -13,6 +14,8 @@ class Alg(object):
     twind = 30                     # dlugość okna obserwacji (ramki danych) w milisekundach
     tstep = 10                     # przesunięcie pomiędzy kolejnymi położeniami okna w milisekundach
     slowa = ['lewo', 'prawo', 'start', 'stop']
+    C = []
+    Nramek = []
 
     def __init__(self):
         self.Mlen = int((Alg.twind*0.001)*Alg.fpr)
@@ -131,8 +134,6 @@ class Alg(object):
 
 def create_DB(file_name):
     a=Alg()
-    C = []
-    Nramek = []
     
     w = re.compile(r'(\D*)(\d*)')
     
@@ -141,7 +142,7 @@ def create_DB(file_name):
     parts = w.search(file_name).groups()
     parts2 = w2.search(file_name).groups()
     
-    print parts
+    print(parts)
     word = []
     wsp = []
     
@@ -152,8 +153,8 @@ def create_DB(file_name):
         y = y[:, 0]
         syg = a.cisza(y)
         Cx = a.cepstrum(syg)
-        C.append(Cx[0])
-        Nramek.append(Cx[1])
+        a.C.append(Cx[0])
+        a.Nramek.append(Cx[1])
         
 #     for k in range(4):
 #     y = sio.loadmat('../glosowe/SG/' + parts[0] + '{}'.format((k+1)))
@@ -163,7 +164,7 @@ def create_DB(file_name):
     y = y[:, 0]
     syg = a.cisza(y)
     Cx = a.cepstrum(syg)
-    nr, glob = a.dtw(Cx[0],C,Nramek)
+    nr, glob = a.dtw(Cx[0],a.C, a.Nramek)
     print('{} to {}, {}'.format(a.slowa[a.slowa.index(parts2[0])],a.slowa[nr], glob[nr]))
     word.append(a.slowa[nr])
     wsp.append(glob[nr])
@@ -176,8 +177,7 @@ def create_DB(file_name):
 if __name__ == '__main__':
  
     a=Alg()
-    C = []
-    Nramek = []
+
     for i in range(4):  # Tworzenie bazy danych
         y = sio.loadmat('../SG/{}_Karolina_1'.format(a.slowa[i]))
 
@@ -186,8 +186,8 @@ if __name__ == '__main__':
 
         syg = a.cisza(y)
         Cx = a.cepstrum(syg)
-        C.append(Cx[0])
-        Nramek.append(Cx[1])
+        a.C.append(Cx[0])
+        a.Nramek.append(Cx[1])
  
     for i in range(4): # Test
         for k in range(0,4):
@@ -196,5 +196,5 @@ if __name__ == '__main__':
             y = y[:, 0]
             syg = a.cisza(y)
             Cx = a.cepstrum(syg)
-            nr, glob = a.dtw(Cx[0],C,Nramek)
+            nr, glob = a.dtw(Cx[0],a.C,a.Nramek)
             print('{} to {} nr {}, {}'.format(a.slowa[i],a.slowa[nr],nr,  glob[nr]))

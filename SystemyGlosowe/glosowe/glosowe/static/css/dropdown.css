@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 
-#record-button, #file-button {
+#record-button, #record-test-button, #file-button {
     text-align: center;
 }
 
