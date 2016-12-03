@@ -22,7 +22,6 @@ a = Alg()
 duration = 3  # seconds
 sd.default.samplerate = a.fpr
 sd.default.channels = 1
-sd.rec(200, dtype='float64')
 
 def index(request):
     return render(request,'index.html', {})
