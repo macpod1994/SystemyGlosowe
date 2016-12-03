@@ -12,14 +12,13 @@ var genChart = function () {
             names[i] = "Inf";
     }
     var trace1 = {
-        x: [-10,10,0,0],
-        y: [0, 0, 10, -10],
+        x: [-5,5,0,0],
+        y: [0, 0, 5, -5],
         text: ['lewo ' + names[0], 'prawo ' + names[1], 'start ' + names[2], 'stop ' + names[3]],
         mode: 'markers+text',
         marker: {
             color: ['rgb(93, 164, 214)', 'rgb(255, 144, 14)',  'rgb(44, 160, 101)', 'rgb(255, 65, 54)'],
-            //size: [40, 60, 80, 100],
-            size: [250/(1+distance[0]),250/(1+distance[1]),250/(1+distance[2]),250/(1+distance[3])],
+            size: [1400/(1+distance[0]),1400/(1+distance[1]),1400/(1+distance[2]),1400/(1+distance[3])],
         }
     };
 

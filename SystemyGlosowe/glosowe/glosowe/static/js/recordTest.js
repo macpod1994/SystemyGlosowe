@@ -12,7 +12,6 @@ var recordTest = function () {
     alert("Po kliknięciu OK masz 3 sekundy na nagranie komendy");
 
     d3.json('/wizualizacja/record/',function(response) {
-        console.log(response);
         distance = response.glob;
         for(var i in distance) {
             distance[i] = distance[i].toFixed(3);

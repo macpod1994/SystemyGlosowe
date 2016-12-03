@@ -5,17 +5,38 @@
 'use strict';
 
 var sendAndMatch = function () {
-    var file = d3.select("#input-row input")[0][0].files[0];
-    d3.select("#input-row input").remove();
-    d3.select("#file-button button").html("Rozpoznaj gotowy plik");
-    console.log(JSON.stringify(file));
-    //d3.request('/wizualizacja/fileMatch/').post(JSON.stringify(file),function(data) {
-    d3.json('/wizualizacja/fileMatch/' + file.name + '/',function(data) {
-    	
-    	console.log(data)
-        //distance = data.glob;
-        //bestFit = data.nazwa;
-        //d3.select("#identification-result p").html("Rozpoznana komenda: " + bestFit);
-        //genChart();
+
+    d3.select('.plot-container').remove();
+    d3.select("#identification-result p").html("");
+
+    var nr = Math.ceil(Math.random()*4);
+    var name = Math.ceil(Math.random()*4);
+    switch(name) {
+        case 1:
+            name = 'lewo';
+            break;
+        case 2:
+            name = 'prawo';
+            break;
+        case 3:
+            name = 'start';
+            break;
+        case 4:
+            name = 'stop';
+            break;
+        default:
+    }
+
+    name = name + '_Karolina_' + nr + '.mat';
+    alert('Wylosowany plik: ' + name);
+
+    d3.json('/wizualizacja/fileMatch/' + name + '/',function(response) {
+        distance = response.glob;
+        for(var i in distance) {
+            distance[i] = distance[i].toFixed(3);
+        }
+        bestFit = response.nazwa;
+        d3.select("#identification-result p").html("Rozpoznana komenda: " + bestFit);
+        genChart();
     });
 };

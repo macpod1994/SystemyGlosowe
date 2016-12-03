@@ -2,14 +2,10 @@
 
 var distance = [0,1,2,3];
 var bestFit = 'lewo';
-// var w = window.open('','','width=100,height=100');
-// w.document.write('Message');
-// w.focus();
-// setTimeout(function() {w.close();}, 5000);
 
 var recordAndMatch = function() {
-    d3.select("#input-row input").remove();
-    d3.select("#file-button button").html("Rozpoznaj gotowy plik");
+    d3.select('.plot-container').remove();
+    d3.select("#identification-result p").html("");
 
     alert("Po kliknięciu OK masz po 3 sekundy na nagranie każdego wzorca");
 

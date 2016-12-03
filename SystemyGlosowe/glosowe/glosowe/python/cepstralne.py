@@ -53,8 +53,6 @@ class Alg(object):
     def dtw(self, Cx, Cwzr, Nwzr):
 
         Ns, Np = np.shape(Cx)
-        print(Ns)
-        print(Np)
 
         down = np.arange(Ns)  #alokacja
         up = np.arange(Ns)
@@ -64,7 +62,10 @@ class Alg(object):
             Nw = Nwzr[numer]                  # liczba wektorów wsp. cepstralnych wzorca
             Q = round(0.2*max(Ns, Nw))        # współczynnik szerokości ścieżki
             d = np.inf * np.ones((Ns, Nw))    # inicjalizacja macierzy odległości,
-            tg = (Nw - Q) / (Ns - Q)          # tangens kąta
+            if Ns==Q:
+                tg=np.inf
+            else:
+                tg = (Nw - Q) / (Ns - Q)          # tangens kąta
             for ns in range(Ns):              # dla każdego cepstrum rozpoznawanego słowa
                 down[ns] = max(1, math.floor(tg * (ns+1) - Q * tg))  # ograniczenie dolne
                 up[ns] = min(Nw, math.ceil(tg*(ns+1)+Q))             # ograniczenie górne
@@ -136,8 +137,6 @@ class Alg(object):
 if __name__ == '__main__':
 
     a=Alg()
-    # C = []
-    # Nramek = []
 
     duration = 3  # seconds
     sd.default.samplerate = a.fpr
@@ -145,49 +144,23 @@ if __name__ == '__main__':
     sd.rec(200, dtype='float64')
 
     for i in range(4):  # Tworzenie bazy danych
-        # y = sio.loadmat('../SG/{}_Karolina_1'.format(a.slowa[i]))
-        # y = y['y']
-        # y = y[:, 0]
-        # print(type(y[0]))
-        # syg = a.cisza(y)
 
-        print("begin")
         myrecording = sd.rec(duration * a.fpr, dtype='float64')
-        print("start")
         sd.wait()
-        # print("play")
-        # sd.play(myrecording, a.fpr)
-        # time.sleep(4)
+        sd.play(myrecording, a.fpr)
+        time.sleep(4)
 
-        print(np.shape(myrecording[:, 0]))
         syg = a.cisza(myrecording[:, 0])
         Cx = a.cepstrum(syg)
 
         a.C.append(Cx[0])
         a.Nramek.append(Cx[1])
 
-    # print( sd.query_devices())
-
-    # for i in range(4): # Test
-    #     for k in range(4):
-    #         y = sio.loadmat('../SG/{}_Karolina_{}'.format((a.slowa[i]),(k+1)))
-    #         y = y['y']
-    #         y = y[:, 0]
-    #         print(np.shape(y))
-    #         syg = a.cisza(y)
-    #         Cx = a.cepstrum(syg)
-    #         nr, glob = a.dtw(Cx[0],C,Nramek)
-    #         print('{} to {}, {}'.format(a.slowa[i],a.slowa[nr], glob[nr]))
-
-    print("begin")
     myrecording = sd.rec(duration * a.fpr, dtype='float64')
-    print("start")
     sd.wait()
-    # print("play")
-    # sd.play(myrecording, a.fpr)
-    # time.sleep(4)
+    sd.play(myrecording, a.fpr)
+    time.sleep(4)
 
-    print(np.shape(myrecording[:,0]))
     syg = a.cisza(myrecording[:,0])
     Cx = a.cepstrum(syg)
     nr, glob = a.dtw(Cx[0], a.C, a.Nramek)

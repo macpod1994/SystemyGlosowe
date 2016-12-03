@@ -22,15 +22,18 @@
 </div>
 
 <div class="row but-row">
-    <div id="record-button" class="col-xs-12 col-sm-6">
+    <div id="record-button" class="col-xs-12 col-sm-6 col-md-3">
         <button onclick="recordAndMatch()" class="row click-btn">Nagraj wzorce</button>
     </div>
-        <div id="record-test-button" class="col-xs-12 col-sm-6">
+        <div id="record-test-button" class="col-xs-12 col-sm-6 col-md-3">
         <button onclick="recordTest()" class="row click-btn">Przetestuj próbkę</button>
     </div>
-    <!--<div id="file-button" class="col-xs-12 col-sm-4">
-        <button onclick="discoverForm()" class="row click-btn">Rozpoznaj gotowy plik</button>
-    </div> -->
+    <div id="file-base-button" class="col-xs-12 col-sm-6 col-md-3">
+        <button onclick="fileBase()" class="row click-btn">Wczytaj wzorce z bazy</button>
+    </div>
+    <div id="file-button" class="col-xs-12 col-sm-6 col-md-3">
+        <button onclick="sendAndMatch()" class="row click-btn">Testuj losowy plik z bazy</button>
+    </div>
 </div>
 
 <div id="input-row" class="row"></div>
@@ -53,7 +56,7 @@
 {% load static %}
 <script type="text/javascript" src="{% static "js/recordAndMatch.js" %}"></script>
 {% load static %}
-<script type="text/javascript" src="{% static "js/discoverForm.js" %}"></script>
+<script type="text/javascript" src="{% static "js/fileBase.js" %}"></script>
 {% load static %}
 <script type="text/javascript" src="{% static "js/sendAndMatch.js" %}"></script>
 {% load static %}
