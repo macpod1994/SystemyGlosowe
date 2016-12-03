@@ -1,0 +1,30 @@
+body {
+    overflow-x: hidden;
+}
+
+.but-row {
+    background-color: darkblue;
+}
+
+.main-banner {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.6em;
+}
+
+#identification-result {
+    text-align: center;
+}
+
+#result-plot {
+    text-align: center;
+}
+
+#result-plot div {
+    margin: auto;
+    display: block;
+}
+
+#input-row {
+    text-align: center;
+}

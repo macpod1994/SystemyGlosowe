@@ -1,0 +1,20 @@
+/* Buttons */
+.click-btn {
+    background-color: darkblue;
+    color: white;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+#record-button, #file-button {
+    text-align: center;
+}
+
+/* Buttons on hover & focus */
+.click-btn:hover, .click-btn:focus {
+    background-color: blue;
+}

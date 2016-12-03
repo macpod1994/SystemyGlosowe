@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Rozpoznawanie komend głosowych</title>
+    {% load static %}
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css">
+    {% load static %}
+    <link href="{% static "css/dropdown.css" %}" rel="stylesheet" type="text/css">
+    {% load static %}
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2 class="main-banner">Rozpoznawanie komend głosowych</h2>
+    </div>
+</div>
+
+<div class="row but-row">
+    <div id="record-button" class="col-xs-12 col-sm-6">
+        <button onclick="recordAndMatch()" class="row click-btn">Nagraj próbkę</button>
+    </div>
+    <div id="file-button" class="col-xs-12 col-sm-6">
+        <button onclick="discoverForm()" class="row click-btn">Rozpoznaj gotowy plik</button>
+    </div>
+</div>
+
+<div id="input-row" class="row"></div>
+
+<div class="row">
+    <div id="identification-result" class="col-xs-12">
+        <p></p>
+    </div>
+</div>
+
+<div class="row">
+    <div id="result-plot" class="col-xs-12"></div>
+</div>
+
+</body>
+{% load static %}
+<script type="text/javascript" src="{% static "js/plotly-latest.min.js" %}"></script>
+{% load static %}
+<script type="text/javascript" src="{% static "js/genChart.js" %}"></script>
+{% load static %}
+<script type="text/javascript" src="{% static "js/recordAndMatch.js" %}"></script>
+{% load static %}
+<script type="text/javascript" src="{% static "js/discoverForm.js" %}"></script>
+{% load static %}
+<script type="text/javascript" src="{% static "js/sendAndMatch.js" %}"></script>
+
+</html>
